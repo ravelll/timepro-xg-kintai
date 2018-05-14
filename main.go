@@ -44,11 +44,6 @@ func kintai(arg string) int {
 		return ExitArgMissing
 	}
 
-	if arg != "in" && arg != "out" {
-		fmt.Println("second argument is wrong. (in/out)")
-		return ExitWrongArg
-	}
-
 	if arg == "in" {
 		_, err := http.PostForm(timeproUrl,
 			url.Values{"PAGESTATUS": {"PUNCH1"}, "PROCESS": {"PUNCH1"}, "LoginID": {loginID}, "PassWord": {password}})
@@ -59,9 +54,7 @@ func kintai(arg string) int {
 		}
 
 		fmt.Printf("[%v] 出勤しました！", time.Now())
-	}
-
-	if arg == "out" {
+	} else if arg == "out" {
 		_, err := http.PostForm(timeproUrl,
 			url.Values{"PAGESTATUS": {"PUNCH1"}, "PROCESS": {"PUNCH1"}, "LoginID": {loginID}, "PassWord": {password}})
 
@@ -71,6 +64,9 @@ func kintai(arg string) int {
 		}
 
 		fmt.Printf("[%v] 退勤しました。お疲れ様でした！", time.Now())
+	} else {
+		fmt.Println("second argument is wrong. (in/out)")
+		return ExitWrongArg
 	}
 
 	return ExitOk
