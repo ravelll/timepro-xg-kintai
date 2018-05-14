@@ -34,17 +34,15 @@ func init() {
 }
 
 func main() {
-	res := kintai(os.Args)
+	res := kintai(os.Args[0])
 	os.Exit(res)
 }
 
-func kintai(args []string) int {
-	if len(args) == 1 {
+func kintai(arg string) int {
+	if arg == "" {
 		fmt.Println("second argument is missed. (in/out)")
 		return ExitArgMissing
 	}
-
-	arg := args[1]
 
 	if arg != "in" && arg != "out" {
 		fmt.Println("second argument is wrong. (in/out)")
