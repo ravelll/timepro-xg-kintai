@@ -34,7 +34,7 @@ func init() {
 }
 
 func main() {
-	res := kintai(os.Args[0])
+	res := kintai(os.Args[1])
 	os.Exit(res)
 }
 
