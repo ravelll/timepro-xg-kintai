@@ -14,6 +14,8 @@ var (
 	password   string
 )
 
+var urlValues = url.Values{}
+
 const (
 	ExitOk = iota
 	ExitArgMissing
@@ -35,6 +37,7 @@ func init() {
 
 func main() {
 	res := kintai(os.Args[1])
+
 	os.Exit(res)
 }
 
@@ -45,8 +48,12 @@ func kintai(arg string) int {
 	}
 
 	if arg == "in" {
-		_, err := http.PostForm(timeproUrl,
-			url.Values{"PAGESTATUS": {"PUNCH1"}, "PROCESS": {"PUNCH1"}, "LoginID": {loginID}, "PassWord": {password}})
+		urlValues.Add("PAGESTATUS", "PUNCH1")
+		urlValues.Add("PROCESS", "PUNCH1")
+		urlValues.Add("LoginID", loginID)
+		urlValues.Add("PassWord", password)
+
+		_, err := http.PostForm(timeproUrl, urlValues)
 
 		if err != nil {
 			fmt.Println(err)
@@ -55,8 +62,12 @@ func kintai(arg string) int {
 
 		fmt.Printf("[%v] 出勤しました！", time.Now())
 	} else if arg == "out" {
-		_, err := http.PostForm(timeproUrl,
-			url.Values{"PAGESTATUS": {"PUNCH1"}, "PROCESS": {"PUNCH1"}, "LoginID": {loginID}, "PassWord": {password}})
+		urlValues.Add("PAGESTATUS", "PUNCH2")
+		urlValues.Add("PROCESS", "PUNCH2")
+		urlValues.Add("LoginID", loginID)
+		urlValues.Add("PassWord", password)
+
+		_, err := http.PostForm(timeproUrl, urlValues)
 
 		if err != nil {
 			fmt.Println(err)
