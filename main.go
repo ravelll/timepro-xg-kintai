@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	timeproUrl string
+	timeproURL string
 	loginID    string
 	password   string
 )
@@ -25,7 +25,7 @@ const (
 )
 
 func init() {
-	timeproUrl = os.Getenv("TIMEPRO_URL")
+	timeproURL = os.Getenv("TIMEPRO_URL")
 	loginID = os.Getenv("TIMEPRO_ID")
 	password = os.Getenv("TIMEPRO_PASSWORD")
 
@@ -53,7 +53,7 @@ func kintai(arg string) int {
 		urlValues.Add("LoginID", loginID)
 		urlValues.Add("PassWord", password)
 
-		_, err := http.PostForm(timeproUrl, urlValues)
+		_, err := http.PostForm(timeproURL, urlValues)
 
 		if err != nil {
 			fmt.Println(err)
@@ -67,7 +67,7 @@ func kintai(arg string) int {
 		urlValues.Add("LoginID", loginID)
 		urlValues.Add("PassWord", password)
 
-		_, err := http.PostForm(timeproUrl, urlValues)
+		_, err := http.PostForm(timeproURL, urlValues)
 
 		if err != nil {
 			fmt.Println(err)
